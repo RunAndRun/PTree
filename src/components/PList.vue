@@ -51,14 +51,10 @@
         }
       },
       setState (bool, item) {
-        if (bool) {
-          // 选中的时候，它的父节点、子节点都要选中，兄弟节点不管。
-          this.$emit('setTrue', bool)
-          if (Array.isArray(item.children) && item.children.length) this.setChildrenTrue(item.children, true)
-        } else {
-          // 不选中的时候，子节点都不选中，父节点、兄弟节点不管。
-          if (Array.isArray(item.children) && item.children.length) this.setChildrenTrue(item.children, false)
-        }
+        // 选中的时候，它的父节点、子节点都要选中，兄弟节点不管。
+        // 不选中的时候，子节点都不选中，父节点、兄弟节点不管。
+        if (bool) this.$emit('setTrue', bool)
+        if (Array.isArray(item.children) && item.children.length) this.setChildrenValue(item.children, bool)
       },
       setTrue (item) {
         item.checked = true
